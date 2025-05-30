@@ -1,94 +1,101 @@
-Capstone: Restaurant Reservation System
-#Link to the deployed APP: [Restaurant Reservation APP] (https://resto-joy.herokuapp.com/dashboard)
+# Σύστημα Κρατήσεων Εστιατορίου (Capstone Project)
 
-App story
-You have been hired as a full stack developer at Periodic Tables, a startup that is creating a reservation system for fine dining restaurants. The software is used only by restaurant personnel when a customer calls to request a reservation. At this point, the customers will not access the system online.
+## Ιστορία Εφαρμογής
 
-Database setup
-Set up four new ElephantSQL database instances - development, test, preview, and production - by following the instructions in the "PostgreSQL: Creating & Deleting Databases" checkpoint.
-After setting up your database instances, connect DBeaver to your new database instances by following the instructions in the "PostgreSQL: Installing DBeaver" checkpoint.
-Knex
-Run npx knex commands from within the back-end folder, which is where the knexfile.js file is located.
+Έχετε προσληφθεί ως Full Stack Developer στην Periodic Tables, μια startup που αναπτύσσει ένα σύστημα κρατήσεων για εστιατόρια υψηλής γαστρονομίας. Η εφαρμογή χρησιμοποιείται μόνο από το προσωπικό του εστιατορίου όταν οι πελάτες καλούν για να κάνουν κράτηση. Οι πελάτες δεν έχουν άμεση πρόσβαση στο σύστημα μέσω διαδικτύου.
 
-Installation
-Fork and clone this repository.
-Run cp ./back-end/.env.sample ./back-end/.env.
-Update the ./back-end/.env file with the connection URL's to your ElephantSQL database instance.
-Run cp ./front-end/.env.sample ./front-end/.env.
-You should not need to make changes to the ./front-end/.env file unless you want to connect to a backend at a location other than http://localhost:5000.
-Run npm install to install project dependencies.
-Run npm run start:dev to start your server in development mode.
-If you have trouble getting the server to run, reach out for assistance.
+Δημιουργία & Λίστα Κρατήσεων
+Οι κρατήσεις δημιουργούνται μόνο:
 
-Running tests
-This project has unit, integration, and end-to-end (e2e) tests. You have seen unit and integration tests in previous projects. End-to-end tests use browser automation to interact with the application just like the user does. Once the tests are passing for a given user story, you have implemented the necessary functionality.
+σε ημέρες λειτουργίας
 
-Test are split up by user story. You can run the tests for a given user story by running:
+κατά τις ώρες λειτουργίας (τουλάχιστον 60 λεπτά πριν το κλείσιμο)
 
-npm run test:X where X is the user story number.
+Καθιέρωση Κράτησης
+Όταν φτάνει ο πελάτης, επιλέγεται τραπέζι για να καθίσει.
 
-Have a look at the following examples:
+US-05 Ολοκλήρωση Τραπεζιού
+Όταν οι πελάτες αποχωρούν, το τραπέζι γίνεται ξανά διαθέσιμο.
 
-npm run test:1 runs all the tests for user story 1 (both frontend and backend).
-npm run test:3:backend runs only the backend tests for user story 3.
-npm run test:3:frontend runs only the frontend tests for user story 3.
-Create and list reservations
-As a restaurant manager
-I want to create a new reservation when a customer calls
-so that I know how many customers will arrive at the restaurant on a given day. I only want to allow reservations to be created on a day when we are open
-so that users do not accidentally create a reservation for days when we are closed.
-I only want to allow reservations to be created during business hours, up to 60 minutes before closing
-so that users do not accidentally create a reservation for a time we cannot accommodate.
+US-06 Κατάσταση Κράτησης
+Οι καταστάσεις είναι: booked, seated, finished
 
-Screenshots
-Create Reservation
+Οι finished κρατήσεις δεν εμφανίζονται στο ταμπλό.
 
-Seat reservation
-As a restaurant manager,
-When a customer with an existing reservation arrives at the restaurant
-I want to seat (assign) their reservation to a specific table
-so that I know which tables are occupied and free.
+US-07 Αναζήτηση Κράτησης
+Αναζήτηση με αριθμό τηλεφώνου (μερικός ή πλήρης αριθμός).
 
-Screenshots
-Seat Reservation
+US-08 Επεξεργασία Κράτησης
+Δυνατότητα επεξεργασίας ή ακύρωσης υπάρχουσας κράτησης.
 
-US-05 Finish an occupied table
-As a restaurant manager
-I want to free up an occupied table when the guests leave
-so that I can seat new guests at that table.
+Δεδομένα API
+Υπάρχουν δύο σύνολα δεδομένων: reservations και tables.
 
-Screenshots
-Finish Occupied tables
 
-US-06 Reservation Status
-As a restaurant manager
-I want a reservation to have a status of either booked, seated, or finished
-so that I can see which reservation parties are seated, and finished reservations are hidden from the dashboard.
+## Ρύθμιση Βάσης Δεδομένων
 
-Screenshots
-Reservation status
+1. Δημιουργήστε 4 βάσεις ElephantSQL: development, test, preview, production.
+2. Συνδέστε τις βάσεις στο DBeaver.
 
-US-07 Search for a reservation by phone number
-As a restaurant manager
-I want to search for a reservation by phone number (partial or complete)
-so that I can quickly access a customer's reservation when they call about their reservation.
+## Knex
 
-Screenshots
-Reservation search
+Εκτελέστε τις εντολές `npx knex` μέσα στον φάκελο `back-end` όπου βρίσκεται το `knexfile.js`.
+Εκτέλεση Δοκιμών
+```bash
 
-US-08 Change an existing reservation
-As a restaurant manager
-I want to be able to modify a reservation if a customer calls to change or cancel their reservation
-so that reservations are accurate and current.
+Copy
+Edit
+npm run test:X            # Τρέχει όλα τα tests για το user story X
+npm run test:X:backend    # Τρέχει μόνο τα backend tests για το user story X
+npm run test:X:frontend   # Τρέχει μόνο τα frontend tests για το user story X
+Παραδείγματα              
+bash
+Copy
+Edit
+npm run test:1
+npm run test:3:backend
+npm run test:3:frontend
+User Stories
 
-Screenshots
-Reservation status
+Δείγματα:
+```bash
+json
+Copy
+Edit
+# Κράτηση
+{
+  "first_name": "Rick",
+  "last_name": "Sanchez",
+  "mobile_number": "202-555-0164",
+  "reservation_date": "2020-12-31",
+  "reservation_time": "20:00:00",
+  "people": 6
+}
 
-API
-There are two datasets that are a part of this project: reservations and tables.
+# Τραπέζι
+{
+  "table_name": "Bar #1",
+  "capacity": 1
+}
 
-You can view all the data inside of the Restaurant-reservation-app\back-end\src\db\data\seeds folder. Each data set can be accessed via a named property in this file. The following is a partial listing of the data in data/db.json:
 
-reservation: { "first_name": "Rick", "last_name": "Sanchez", "mobile_number": "202-555-0164", "reservation_date": "2020-12-31", "reservation_time": "20:00:00", "people": 6, "created_at": "2020-12-10T08:30:32.326Z", "updated_at": "2020-12-10T08:30:32.326Z" },
+## Οδηγίες Εγκατάστασης
 
-Table : { table_name: "Bar #1", capacity: 1 },
+# Βήμα 1: Κλωνοποίηση αποθετηρίου
+git clone <repository-url>
+cd restaurant-reservation
+
+# Βήμα 2: Δημιουργία αρχείων περιβάλλοντος
+cp ./back-end/.env.sample ./back-end/.env
+# ➤ Ενημερώστε το .env με το ElephantSQL URL σας
+
+cp ./front-end/.env.sample ./front-end/.env
+# ➤ Δεν απαιτείται αλλαγή εκτός αν χρησιμοποιείτε διαφορετικό backend URL
+
+# Βήμα 3: Εγκατάσταση εξαρτήσεων
+npm install
+
+# Βήμα 4: Εκκίνηση σε development mode
+npm run start:dev 
+
+
